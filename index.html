@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sober Legend</title>
+  <meta name="description" content="Sober Legend — tools, tips, and community for sober success.">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+  :root{
+    --bg:#0b0f12;          /* near-black */
+    --fg:#e8ecef;          /* off-white */
+    --muted:#96a0a6;       /* cool gray */
+    --sage:#9bbf9a;        /* soft sage accent */
+    --sage-strong:#7aa475; /* deeper sage */
+    --panel:#0f1418;       /* card bg */
+    --ring: rgba(155,191,154,.35);
+  }
+  *{ box-sizing: border-box; }
+  html,body{ height:100%; }
+  body{
+    margin:0;
+    font-family: "Outfit", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    color:var(--fg);
+    background: radial-gradient(1200px 600px at 80% -10%, rgba(155,191,154,.08), transparent 60%), var(--bg);
+    line-height:1.6;
+  }
+  .wrap{ max-width:1100px; margin:0 auto; padding:1.2rem; }
+  .skip-link{
+    position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;
+  }
+  .skip-link:focus{ position:static; width:auto; height:auto; background:#000; color:#fff; padding:.5rem .75rem; }
+  .site-header{
+    position:sticky; top:0; z-index:20; backdrop-filter: blur(6px);
+    background: rgba(11,15,18,.6); border-bottom:1px solid rgba(255,255,255,.05);
+  }
+  .brand{ display:flex; align-items:center; gap:.8rem; }
+  .logo{
+    width:40px; height:40px; border-radius:12px; background:linear-gradient(135deg, var(--sage), var(--sage-strong));
+    color:#001306; display:grid; place-items:center; font-weight:800;
+    box-shadow:0 10px 25px var(--ring);
+  }
+  .brand-title{ margin:0; font-size:1.25rem; letter-spacing:.3px; }
+  .brand-tag{ margin:.15rem 0 0; font-size:.9rem; color:var(--muted); }
+  .nav{ list-style:none; display:flex; gap:1rem; margin:0; padding:0; }
+  .nav a{ color:var(--fg); text-decoration:none; opacity:.9; }
+  .nav a:hover{ opacity:1; }
+  .site-header .wrap{ display:flex; align-items:center; justify-content:space-between; }
+  .hero{ padding: 3.5rem 0 2rem; }
+  .hero-grid{ display:grid; gap:2rem; grid-template-columns: 1.2fr 1fr; align-items:center; }
+  .hero-text h2{ font-size: clamp(2rem, 5vw, 3rem); margin:.2rem 0 .4rem; }
+  .accent{ color: var(--sage); }
+  .lead{ color:var(--muted); font-size:1.1rem; max-width:55ch; }
+  .cta-row{ display:flex; gap:.8rem; margin-top:1rem; flex-wrap:wrap; }
+  .btn{
+    display:inline-block; background:var(--sage); color:#0b2410; border:1px solid transparent;
+    padding:.75rem 1rem; border-radius:.8rem; font-weight:700; text-decoration:none;
+    box-shadow:0 10px 26px var(--ring); transition: transform .06s ease, box-shadow .15s ease, filter .2s ease;
+  }
+  .btn:hover{ transform: translateY(-1px); }
+  .link{ color:var(--fg); text-decoration:none; border-bottom:1px dashed rgba(232,236,239,.35); padding-bottom:2px; }
+  .hero-art{ position:relative; min-height:260px; }
+  .blob{
+    position:absolute; border-radius:50%;
+    filter: blur(30px); opacity:.7; mix-blend-mode: screen;
+  }
+  .b1{ width:220px; height:220px; background:rgba(155,191,154,.5); top:10%; left:20%; }
+  .b2{ width:180px; height:180px; background:rgba(122,164,117,.45); top:30%; left:55%; }
+  .b3{ width:140px; height:140px; background:rgba(155,191,154,.35); top:55%; left:25%; }
+  .section{ padding:2.5rem 0; }
+  .two-col{ display:grid; gap:1.5rem; grid-template-columns: 1.1fr .9fr; align-items:stretch; }
+  .bullets{ margin:.5rem 0 0; padding-left:1rem; color:var(--fg); }
+  .bullets li{ margin:.35rem 0; }
+  .quote-card{
+    background:var(--panel); border:1px solid rgba(255,255,255,.06); border-radius:1rem; padding:1.2rem;
+    box-shadow: 0 12px 28px rgba(0,0,0,.35);
+  }
+  .quote{ font-size:1.6rem; margin:.2rem 0 .4rem; }
+  .sig{ color:var(--muted); margin:0; }
+  .join{ background: radial-gradient(800px 400px at 20% -10%, rgba(155,191,154,.07), transparent 60%); }
+  .join-sub{ color:var(--muted); margin-top:.2rem; }
+  .form{ display:grid; gap:1rem; max-width:540px; margin-top:1rem; }
+  .field label{ display:block; margin-bottom:.35rem; color:var(--muted); }
+  .field input{
+    width:100%; padding:.8rem 1rem; border-radius:.75rem; border:1px solid rgba(255,255,255,.1);
+    background:rgba(255,255,255,.04); color:var(--fg);
+  }
+  .field input:focus{ outline:none; box-shadow:0 0 0 3px var(--ring); }
+  .err{ color:#ffb4b4; min-height:1.2em; display:inline-block; }
+  .form-status{
+    margin-top:.5rem; padding:.7rem .9rem; border-radius:.6rem; background:rgba(155,191,154,.12); border:1px solid rgba(155,191,154,.35);
+  }
+  .links{ display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:1rem; }
+  .card{
+    display:block; background:var(--panel); padding:1rem; border-radius:.9rem; text-decoration:none; color:var(--fg);
+    border:1px solid rgba(255,255,255,.06); text-align:center;
+  }
+  .card:hover{ border-color: rgba(155,191,154,.35); }
+  .site-footer{ border-top:1px solid rgba(255,255,255,.08); }
+  .site-footer p{ color:var(--muted); text-align:center; margin: 1.2rem 0; }
+  @media (max-width: 880px){
+    .hero-grid, .two-col{ grid-template-columns: 1fr; }
+    .hero{ padding: 2.4rem 0 1.2rem; }
+  }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">SL</div>
+        <div class="brand-text">
+          <h1 class="brand-title">Sober Legend</h1>
+          <p class="brand-tag">Minimal. Clean. Powerful.</p>
+        </div>
+      </div>
+      <nav aria-label="Primary">
+        <ul class="nav">
+          <li><a href="#about">About</a></li>
+          <li><a href="#join">Join</a></li>
+          <li><a href="#links">Links</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-text">
+          <h2>Become the <span class="accent">Legend</span> of your life.</h2>
+          <p class="lead">
+            Tools, rituals, and real talk for building a sober life that’s strong, sexy, and sustainable.
+          </p>
+          <div class="cta-row">
+            <a href="#join" class="btn">Get the Starter Kit</a>
+            <a href="#about" class="link">Learn more</a>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="blob b1"></div>
+          <div class="blob b2"></div>
+          <div class="blob b3"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <div class="wrap two-col">
+        <div>
+          <h3>What is Sober Legend?</h3>
+          <p>
+            A movement and a method—combining daily habits, community, and accountability.
+            We keep it simple and stylish, with practical routines you can actually stick to.
+          </p>
+          <ul class="bullets">
+            <li>Daily check-ins and micro-wins</li>
+            <li>Mindset & movement prompts</li>
+            <li>Fragrance & ritual to anchor the vibe</li>
+          </ul>
+        </div>
+        <div class="quote-card">
+          <p class="quote">“Legends Never Die.”</p>
+          <p class="sig">— Latara Legend Darrett</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- JOIN / FORM -->
+    <section id="join" class="section join">
+      <div class="wrap">
+        <h3>Join the Waitlist</h3>
+        <p class="join-sub">Get the free Starter Kit and early access to new drops.</p>
+
+        <form id="waitlistForm" class="form" action="https://formspree.io/f/mblapnan" method="POST" novalidate>
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" autocomplete="name" placeholder="Your name" required />
+            <small class="err" id="nameErr" role="status" aria-live="polite"></small>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+            <small class="err" id="emailErr" role="status" aria-live="polite"></small>
+          </div>
+          <input type="hidden" name="source" value="Sober Legend Landing Page">
+          <button class="btn" type="submit">Send me the Starter Kit</button>
+          <p class="privacy">
+            By joining, you agree to receive emails from Sober Legend. Unsubscribe anytime.
+          </p>
+          <div class="form-status" id="formStatus" role="alert" aria-live="polite" hidden></div>
+        </form>
+
+        <noscript>
+          <p><strong>Note:</strong> JavaScript is disabled. This form still works,
+          but you won’t see instant success/error messages.</p>
+        </noscript>
+      </div>
+    </section>
+
+    <!-- LINKS -->
+    <section id="links" class="section">
+      <div class="wrap links">
+        <a class="card" href="https://www.tiktok.com/" target="_blank" rel="noopener">TikTok</a>
+        <a class="card" href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+        <a class="card" href="#" target="_blank" rel="noopener">Shop (coming soon)</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© <span id="year"></span> Sober Legend. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Basic client-side validation + Formspree async submit
+  const form = document.getElementById('waitlistForm');
+  const statusEl = document.getElementById('formStatus');
+
+  const nameEl = document.getElementById('name');
+  const emailEl = document.getElementById('email');
+  const nameErr = document.getElementById('nameErr');
+  const emailErr = document.getElementById('emailErr');
+
+  function validate() {
+    let ok = true;
+    nameErr.textContent = '';
+    emailErr.textContent = '';
+
+    if (!nameEl.value.trim()) {
+      nameErr.textContent = 'Please enter your name.';
+      ok = false;
+    }
+    const email = emailEl.value.trim();
+    if (!email) {
+      emailErr.textContent = 'Please enter your email.';
+      ok = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      emailErr.textContent = 'Please enter a valid email.';
+      ok = false;
+    }
+    return ok;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    statusEl.hidden = true;
+    statusEl.textContent = '';
+
+    if (!validate()) return;
+
+    const data = new FormData(form);
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' },
+      });
+
+      if (res.ok) {
+        form.reset();
+        statusEl.textContent = 'You’re in! Check your inbox for the Starter Kit link.';
+        statusEl.hidden = false;
+      } else {
+        const r = await res.json().catch(() => ({}));
+        statusEl.textContent = r?.errors?.[0]?.message || 'Something went wrong. Please try again.';
+        statusEl.hidden = false;
+      }
+    } catch (err) {
+      statusEl.textContent = 'Network error. Please try again in a moment.';
+      statusEl.hidden = false;
+    }
+  });
+  </script>
+</body>
+</html>
