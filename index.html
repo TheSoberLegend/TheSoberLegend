@@ -126,7 +126,6 @@ input:focus{outline:none; box-shadow:0 0 0 3px var(--ring)}
   border-radius:.7rem; text-decoration:none
 }
 .social-pill:hover{ background:rgba(255,255,255,.08) }
-
 </head>
 <body>
 <header class="header">
@@ -137,13 +136,43 @@ input:focus{outline:none; box-shadow:0 0 0 3px var(--ring)}
     </div>
     <nav><ul class="nav">
   <li><a href="#tracks">Tracklist</a></li>
-  <li><a href="#join">Join</a></li>
+<section id="join" class="section">
+  <div class="wrap">
+    <h3 style="font-family:Anton,sans-serif;letter-spacing:.4px;margin:.2rem 0 .4rem">Get on the Launch List</h3>
+    <p class="lead" style="margin:.2rem 0 1rem; color:var(--muted)">
+      Be first to access the Starter Kit with an exclusive <strong>launch discount</strong>.
+    </p>
+
+    <form id="waitlistForm" class="form" action="https://formspree.io/f/mblapnan" method="POST" novalidate>
+      <div>
+        <label for="name">Name</label>
+        <input id="name" name="name" placeholder="Your name" required />
+        <small class="err" id="nameErr" aria-live="polite"></small>
+      </div>
+      <div>
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" placeholder="you@example.com" required />
+        <small class="err" id="emailErr" aria-live="polite"></small>
+      </div>
+
+      <!-- tagging fields so you know they came from the LP + are discount-eligible -->
+      <input type="hidden" name="offer" value="launch_discount">
+      <input type="hidden" name="lp" value="street_tracklist_v1">
+      <!-- optional: capture a referral if you add ?ref= to your URL -->
+      <input type="hidden" name="ref" id="refField" value="">
+
+      <button class="btn" type="submit">Claim Launch Discount</button>
+      <div class="form-status" id="formStatus" role="alert" aria-live="polite" hidden></div>
+      <p style="color:var(--muted);margin:.4rem 0 0">Unsubscribe anytime.</p>
+    </form>
+  </div>
+</section>
+
   <li><a href="#gallery">Gallery</a></li>
   <li class="sep" aria-hidden="true">|</li>
   <li><a class="social-pill" href="https://www.tiktok.com/@YOUR_TIKTOK" target="_blank" rel="noopener">TikTok</a></li>
   <li><a class="social-pill" href="https://www.instagram.com/YOUR_INSTAGRAM" target="_blank" rel="noopener">Instagram</a></li>
 </ul></nav>
-
   </div>
 </header>
 
@@ -155,8 +184,8 @@ input:focus{outline:none; box-shadow:0 0 0 3px var(--ring)}
         <h2 class="h1">Stay Sharp. Stay Sober. <span style="color:var(--sage)">Stay Legendary.</span></h2>
         <p class="lead">Streetwear collage meets clean living. Real rituals, zero judgment, full style.</p>
         <div class="cta">
-          <a class="btn" href="#join">Get the Starter Kit (Free)</a>
-          <a class="btn ghost" href="#tracks">See the Tracklist</a>
+         <a class="btn" href="#join">Get Launch Discount + Starter Kit</a>
+  <a class="btn ghost" href="#tracks">See the Tracklist</a>
         </div>
       </div>
 
@@ -348,6 +377,13 @@ function render(){ const iso=localStorage.getItem(KEY);
 document.getElementById('startDateForm').addEventListener('submit',e=>{e.preventDefault(); if(!start.value) return; localStorage.setItem(KEY,start.value); render();});
 document.getElementById('resetStart').addEventListener('click',()=>{ localStorage.removeItem(KEY); render();});
 render();
+  <script>
+  (function(){
+    const p = new URLSearchParams(location.search);
+    const ref = p.get('ref');
+    if(ref){ const f = document.getElementById('refField'); if(f) f.value = ref; }
+  })();
 </script>
+
 </body>
 </html>
