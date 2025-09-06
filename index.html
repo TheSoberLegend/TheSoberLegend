@@ -119,6 +119,14 @@ input:focus{outline:none; box-shadow:0 0 0 3px var(--ring)}
   .gallery{grid-template-columns:1fr 1fr}
 }
 </style>
+  /* socials */
+.nav .sep{opacity:.35;margin:0 .25rem}
+.social-pill{
+  padding:.45rem .7rem; border:1px solid rgba(255,255,255,.18);
+  border-radius:.7rem; text-decoration:none
+}
+.social-pill:hover{ background:rgba(255,255,255,.08) }
+
 </head>
 <body>
 <header class="header">
@@ -128,10 +136,14 @@ input:focus{outline:none; box-shadow:0 0 0 3px var(--ring)}
       <h1>Sober Legend</h1>
     </div>
     <nav><ul class="nav">
-      <li><a href="#tracks">Tracklist</a></li>
-      <li><a href="#join">Join</a></li>
-      <li><a href="#gallery">Gallery</a></li>
-    </ul></nav>
+  <li><a href="#tracks">Tracklist</a></li>
+  <li><a href="#join">Join</a></li>
+  <li><a href="#gallery">Gallery</a></li>
+  <li class="sep" aria-hidden="true">|</li>
+  <li><a class="social-pill" href="https://www.tiktok.com/@YOUR_TIKTOK" target="_blank" rel="noopener">TikTok</a></li>
+  <li><a class="social-pill" href="https://www.instagram.com/YOUR_INSTAGRAM" target="_blank" rel="noopener">Instagram</a></li>
+</ul></nav>
+
   </div>
 </header>
 
